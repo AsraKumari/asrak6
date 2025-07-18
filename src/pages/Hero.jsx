@@ -1,13 +1,10 @@
 // src/pages/Hero.jsx
 import React from 'react';
 import { motion } from 'framer-motion';
-
-// Import official icons from react-icons
 import { FaReact, FaGitAlt, FaHtml5, FaCss3Alt, FaJsSquare } from 'react-icons/fa';
 import { SiTailwindcss, SiVercel, SiFramer } from 'react-icons/si';
 
 const Hero = () => {
-  // Animation variants for staggered appearance of the main content block
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -19,13 +16,11 @@ const Hero = () => {
     },
   };
 
-  // General item variants for paragraphs, skills, and buttons
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } },
   };
 
-  // Dedicated animation variants for the main heading
   const headingVariants = {
     hidden: { opacity: 0, y: -50, scale: 0.8 },
     visible: {
@@ -40,7 +35,6 @@ const Hero = () => {
     },
   };
 
-  // Define your skills with their corresponding icon components and colors
   const skills = [
     { name: 'React.js', icon: FaReact, color: '#61DAFB' },
     { name: 'Tailwind CSS', icon: SiTailwindcss, color: '#38B2AC' },
@@ -50,7 +44,6 @@ const Hero = () => {
     { name: 'JavaScript', icon: FaJsSquare, color: '#F7DF1E' },
   ];
 
-  // Function to handle resume download
   const handleDownloadResume = () => {
     const resumeUrl = '/Asrak6-FrontendDev-Resume.pdf';
     const link = document.createElement('a');
@@ -64,8 +57,8 @@ const Hero = () => {
   return (
     <section
       id="home"
-      // FIX: Changed 'py-48' to 'pt-48 pb-24' to reduce bottom padding
-      className="relative flex items-center justify-center min-h-screen text-white overflow-hidden pt-48 pb-24 px-6 md:px-12"
+      // FIX: Reduced top padding on mobile (pt-36) and kept original for desktop (md:pt-48)
+      className="relative flex items-center justify-center min-h-screen text-white overflow-hidden pt-36 md:pt-48 pb-24 px-6 md:px-12"
       style={{
         backgroundColor: '#000000',
         backgroundImage: 'radial-gradient(ellipse at bottom, rgba(50,0,100,0.05) 0%, transparent 70%)',

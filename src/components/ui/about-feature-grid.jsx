@@ -101,16 +101,18 @@ export const SkillsContent = () => {
 
 // --- Card 5: Generative AI ---
 export const GenerativeAIContent = () => (
-  <div className="relative h-full p-6">
-    <div className="w-full h-px bg-white/90 mb-6"></div>
-    <div className="flex flex-col md:flex-row items-center justify-between">
+  <div className="relative h-full p-6 flex flex-col"> {/* Added flex flex-col for proper layout */}
+    {/* FIX: Hide this divider on mobile/tablet to prevent the "double line" effect */}
+    <div className="hidden lg:block w-full h-px bg-white/90 mb-6"></div>
+    {/* FIX: Changed items-center to items-stretch, added self-end to globe wrapper for mobile */}
+    <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between flex-grow">
       <div className="flex-grow md:pr-10">
         <h4 className="text-xl md:text-2xl font-semibold text-white mb-4">Future Forward: Generative AI</h4>
         <p className="text-sm md:text-base text-gray-300 leading-relaxed">
           My passion for cutting-edge technology led me to earn a verified Introduction to Generative AI badge from **Google Cloud (July 2025). This exploration into Large Language Models (LLMs), prompt engineering, and tools like Vertex AI and PaLM has fundamentally shaped my approach to development. I am now equipped to build next-generation web solutions that leverage the power of AI to create truly intelligent and dynamic user experiences.
         </p>
       </div>
-      <div className="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 mt-8 md:mt-0 opacity-80">
+      <div className="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 mt-8 md:mt-0 opacity-80 self-end md:self-auto">
         <Globe className="w-full h-full" />
       </div>
     </div>
@@ -129,10 +131,9 @@ function AboutFeatureGrid() {
   ];
 
   return (
-    // FIX: Top padding set to zero
     <div className="relative z-20 pt-0 pb-0 lg:pb-24 max-w-7xl mx-auto">
-      <div className="px-8 mb-16">
-        {/* FIX: Gradient added to heading */}
+      {/* FIX: Reduced bottom margin on mobile (mb-8) */}
+      <div className="px-8 mb-8 md:mb-16">
         <h4
           className="text-3xl lg:text-5xl lg:leading-tight max-w-5xl mx-auto text-center tracking-tight font-extrabold"
           style={{
@@ -149,7 +150,8 @@ function AboutFeatureGrid() {
         </p>
       </div>
       <div className="relative">
-        <div className="grid grid-cols-1 lg:grid-cols-6 mt-12 xl:border rounded-md border-neutral-800">
+        {/* FIX: Reduced top margin on mobile (mt-8) */}
+        <div className="grid grid-cols-1 lg:grid-cols-6 mt-8 md:mt-12 xl:border rounded-md border-neutral-800">
           {features.map((feature, index) => (
             <FeatureCard key={index} className={feature.className}>
               <div className="h-full w-full">{feature.content}</div>
@@ -164,7 +166,7 @@ function AboutFeatureGrid() {
 // Reusable Card Component
 const FeatureCard = ({ children, className }) => {
   const cardClasses = `relative overflow-hidden bg-black/30 backdrop-blur-md transition-all duration-300 ease-in-out hover:bg-purple-950/20 ${className || ''}`;
-  
+
   return (
     <motion.div
       className={cardClasses}

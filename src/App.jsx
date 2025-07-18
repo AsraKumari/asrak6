@@ -8,10 +8,11 @@ import { cn } from './lib/utils'; // Correct import for cn utility
 import Navbar from './components/Navbar';
 import Hero from './pages/Hero';
 import About from './pages/About';
+import Projects from './pages/Projects'; // Import the Projects component
 
-// Placeholder Section Component (kept for Projects/Contact)
+// Placeholder Section Component (kept for Contact)
 const Section = ({ id, title, color }) => (
-  <section id={id} className={cn("h-screen flex items-center justify-center", color)}>
+  <section id={id} className={cn("min-h-screen flex items-center justify-center", color)}>
     <h1 className="text-5xl font-bold text-white">{title} Section</h1>
   </section>
 );
@@ -19,13 +20,15 @@ const Section = ({ id, title, color }) => (
 // Main App Component
 export default function App() {
   return (
-    <div className="bg-black min-h-screen text-white font-sans">
+    // Added font-inter and text-gray-100 for consistent typography and visibility
+    <div className="bg-black min-h-screen text-gray-100 font-inter">
       <Navbar />
       <main>
         <Hero />
         <About />
-        {/* Placeholder sections for Projects and Contact */}
-        <Section id="projects" title="Projects" color="bg-gradient-to-br from-purple-900/30 to-black" />
+        {/* Render the Projects component here */}
+        <Projects />
+        {/* Placeholder section for Contact */}
         <Section id="contact" title="Contact" color="bg-gradient-to-br from-green-900/30 to-black" />
       </main>
 
@@ -46,10 +49,10 @@ export default function App() {
           }
         }
 
-        /* * Performance Optimization: 
+        /* * Performance Optimization:
          * This class forces the animated blobs onto their own GPU layer,
          * preventing "jank" or "glitching" during scrolling.
-        */
+         */
         .force-gpu {
           position: absolute;
           will-change: transform;
