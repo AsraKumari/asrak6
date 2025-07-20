@@ -12,8 +12,8 @@ const Navbar = () => {
   const [activeLink, setActiveLink] = useState('#home');
   const observer = useRef(null);
 
-  // --- START: New logic for scroll-based visibility ---
-  const [showNav, setShowNav] = useState(true);
+  // --- START: Updated logic for scroll-based visibility ---
+  const [showNav, setShowNav] = useState(true); // Start with nav visible
   const [isMobile, setIsMobile] = useState(false);
   const scrollTimeout = useRef(null);
 
@@ -27,35 +27,43 @@ const Navbar = () => {
 
   // Handle scroll behavior on mobile devices
   useEffect(() => {
-    // On desktop, always show the nav and do nothing else
     if (!isMobile) {
       setShowNav(true);
       return;
     }
 
-    // On mobile, show the nav on scroll and hide it after 1.5s of inactivity
+    // This function now checks the scroll position
     const handleScroll = () => {
-      setShowNav(true);
+      // Clear any existing timeout
       if (scrollTimeout.current) {
         clearTimeout(scrollTimeout.current);
       }
-      scrollTimeout.current = setTimeout(() => {
-        setShowNav(false);
-      }, 1500);
-    };
-    
-    // Hide nav initially after a short delay on page load
-    const initialHideTimeout = setTimeout(() => setShowNav(false), 2500);
 
+      const isAtTop = window.scrollY < 50; // Check if user is in the hero section
+
+      if (isAtTop) {
+        // If in the hero section, always show the navbar
+        setShowNav(true);
+      } else {
+        // If scrolled down, show the navbar and set a timeout to hide it
+        setShowNav(true);
+        scrollTimeout.current = setTimeout(() => {
+          setShowNav(false);
+        }, 1500);
+      }
+    };
+
+    // The navbar is visible on load, no need for an initial hide timeout
     window.addEventListener('scroll', handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      if (scrollTimeout.current) clearTimeout(scrollTimeout.current);
-      clearTimeout(initialHideTimeout);
+      if (scrollTimeout.current) {
+        clearTimeout(scrollTimeout.current);
+      }
     };
   }, [isMobile]);
-  // --- END: New logic for scroll-based visibility ---
+  // --- END: Updated logic for scroll-based visibility ---
 
   // Intersection Observer for highlighting the active link
   useEffect(() => {
@@ -94,17 +102,15 @@ const Navbar = () => {
     <>
       <motion.nav
         variants={navVariants}
-        // Animate based on state for mobile, otherwise always 'visible' for desktop
         animate={isMobile ? (showNav ? 'visible' : 'hidden') : 'visible'}
         initial="visible"
-        className="fixed top-0 left-0 right-0 z-50 py-4 px-6 md:px-12 flex justify-center"
+        // FIX: Increased z-index from z-50 to z-[100] to ensure it's above other elements
+        className="fixed top-0 left-0 right-0 z-[100] py-4 px-6 md:px-12 flex justify-center"
       >
         <div className="relative p-2 rounded-full bg-black/20 backdrop-blur-lg border border-white/10 shadow-lg w-fit flex items-center justify-center">
-          {/* Main navigation links - now visible on all screen sizes */}
           <div className="flex items-center space-x-1 sm:space-x-4 md:space-x-6 lg:space-x-8">
             {navLinks.map((link) => {
               const isActive = activeLink === link.href;
-              // Responsive classes for better fit on small screens
               const linkClasses = `
                 text-gray-300 hover:text-white tracking-wider font-medium transition-all duration-300 relative text-sm sm:text-base px-2 sm:px-3 py-2 rounded-full
                 ${isActive ? 'text-white' : 'hover:bg-white/10'}
@@ -125,7 +131,6 @@ const Navbar = () => {
           </div>
         </div>
       </motion.nav>
-      {/* The entire mobile menu block has been removed */}
     </>
   );
 };

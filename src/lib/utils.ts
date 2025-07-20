@@ -1,10 +1,6 @@
-// src/lib/utils.js
 import { clsx } from "clsx";
 import { twMerge } from "tailwind-merge";
 
-export function cn() {
-  for (var _len = arguments.length, inputs = new Array(_len), _key = 0; _key < _len; _key++) {
-    inputs[_key] = arguments[_key];
-  }
+export function cn(...inputs) {
   return twMerge(clsx(inputs));
 }

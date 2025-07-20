@@ -1,4 +1,12 @@
+/* src/app/globals.css (or your main CSS file) */
 
+html {
+  scroll-behavior: smooth;
+}
+
+/* Rest of your existing CSS */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Any other global styles */

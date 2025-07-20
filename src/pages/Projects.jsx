@@ -1,85 +1,154 @@
-// src/pages/Projects.jsx
 "use client";
 
 import React from 'react';
+import { motion } from 'framer-motion';
 import AnimatedPinDemo from '@/components/animated-pin-demo';
 
-// Define the project data - 3 projects
-const projects = [
-  {
-    id: 1,
-    title: 'FinRef',
-    description: 'A comprehensive financial reference application designed to provide quick and clear access to financial terms, concepts, and market insights.',
-    githubLink: 'https://github.com/AsraKumari/FinRef.git',
-    livePreview: 'https://fin-ref.vercel.app',
-  },
-  {
-    id: 2,
-    title: 'Hexora UI',
-    description: 'A cutting-edge, modular user interface library built with React, showcasing a wide array of reusable and highly customizable UI components.',
-    githubLink: 'https://github.com/AsraKumari/hexora-ui.git',
-    livePreview: 'https://hexora-ui.vercel.app',
-  },
-  {
-    id: 3,
-    title: 'TaskFlow Dashboard',
-    description: 'An intuitive task management dashboard for teams, featuring drag-and-drop functionality, progress tracking, and user collaboration.',
-    githubLink: 'https://github.com/yourusername/taskflow-dashboard.git', // Replace with actual link
-    livePreview: 'https://taskflow-dashboard.vercel.app', // Replace with actual link
-  },
+// --- DATA FOR YOUR PROJECTS ---
+const projectData = [
+    {
+        id: 1,
+        title: "Techcognita Corporate Suite",
+        image: "/TechcognitaSuite.png",
+        highlights: [
+            "Led the end-to-end frontend development for a major corporate web suite.",
+            "Collaborated directly with backend teams to integrate APIs in a professional environment.",
+            "Maintained full ownership of the user interface architecture under a strict NDA.",
+        ],
+        techStack: ["React", "JavaScript (ES6+)", "CSS3", "REST APIs", "Figma"],
+        liveLink: "https://suite.techcognita.com/",
+        githubLink: null,
+    },
+    {
+        id: 2,
+        title: "FinRef Trade Tracker",
+        image: "/FinRef.png",
+        highlights: [
+            "Empowers users to track their financial portfolio with an interactive, responsive interface.",
+            "Features real-time data visualization using Recharts, updating graphs instantly without refreshes.",
+            "Full CRUD functionality with data persistence handled via Local Storage.",
+        ],
+        techStack: ["React", "Recharts", "Data Visualization", "Local Storage", "CSS"],
+        liveLink: "https://fin-ref.vercel.app/",
+        githubLink: "https://github.com/AsraKumari/FinRef.git",
+    },
+    {
+        id: 3,
+        title: "Hexora UI Learning Lab",
+        image: "/HexoraUI.png",
+        highlights: [
+            "Serves as my active development journal for mastering new frontend technologies.",
+            "Implemented advanced techniques like parallax scrolling based on daily tasks from my mentor.",
+            "Showcases a commitment to continuous growth and translating knowledge into polished features.",
+        ],
+        techStack: ["React", "Next.js", "GSAP", "Parallax", "UI/UX"],
+        liveLink: "https://hexora-ui.vercel.app/",
+        githubLink: "https://github.com/AsraKumari/hexora-ui.git",
+    },
+    { // --- NEW PROJECT: Orchid Aura ---
+        id: 4,
+        title: "Orchid Aura – Flower Shop Landing Page",
+        image: "/OrchidAura0.png", // Assuming you'll add this image to your public folder
+        highlights: [
+            "Implemented real-time theme and font size customization, enhancing user personalization.",
+            "Designed a fully responsive, modern UI/UX with smooth transitions for an engaging experience.",
+            "Built with React and Tailwind CSS, powered by Vite for fast development and deployment.",
+        ],
+        techStack: ["React", "Tailwind CSS", "Vite", "React Icons", "GitHub Pages"],
+        liveLink: "https://asrakumari.github.io/react-tailwind/",
+        githubLink: "https://github.com/AsraKumari/react-tailwind.git",
+    },
 ];
 
-const Projects = () => {
-  return (
-    <div className="min-h-screen bg-black text-gray-100 p-6 sm:p-10 font-inter antialiased">
-      <div className="max-w-7xl mx-auto py-12">
-        <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-16 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-white">
-          My Creative Works
-        </h1>
 
-        {/* Responsive Flex container for cards and links */}
-        <div className="flex flex-col items-center gap-y-12 md:flex-row md:flex-nowrap md:gap-x-8 md:justify-center pb-4 md:overflow-x-auto">
-          {projects.map((project, index) => (
-            <div key={index} className="flex flex-col items-center"> {/* Wrapper for pin and links */}
-              <AnimatedPinDemo
-                title={project.title}
-                description={project.description}
-                livePreviewLink={project.livePreview} // This is the main link for the pin
-              />
-              {/* Direct text links below the 3D pin */}
-              <div className="flex gap-6 mt-4 justify-center"> {/* Adjusted margin-top to ensure visibility */}
-                <a
-                  href={project.githubLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-purple-400 hover:text-purple-300 text-base font-medium transition-colors duration-200 flex items-center"
-                >
-                  {/* GitHub Icon (inline SVG) */}
-                  <svg className="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
-                    <path fillRule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.47.087.683-.233.683-.518 0-.256-.007-1.05-.01-2.062-2.787.603-3.37-1.34-3.37-1.34-.454-1.156-1.11-1.464-1.11-1.464-.908-.618.069-.606.069-.606 1.004.07 1.532 1.03 1.532 1.03.89 1.529 2.342 1.087 2.91.83.09-.645.349-1.087.635-1.337-2.22-.253-4.555-1.11-4.555-4.949 0-1.091.39-1.984 1.029-2.682-.103-.253-.447-1.272.098-2.65 0 0 .84-.27 2.75 1.025A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.025 2.747-1.025.546 1.378.202 2.397.099 2.65.64.698 1.028 1.591 1.028 2.682 0 3.847-2.339 4.695-4.566 4.942.359.31.678.921.678 1.855 0 1.337-.012 2.419-.012 2.747 0 .288.213.608.688.502C20.147 20.198 23 16.443 23 12.017 23 6.484 18.522 2 13 2h-1z" clipRule="evenodd" />
-                  </svg>
-                  GitHub
-                </a>
-                <a
-                  href={project.livePreview}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-purple-400 hover:text-purple-300 text-base font-medium transition-colors duration-200 flex items-center"
-                >
-                  {/* External Link Icon (inline SVG) */}
-                  <svg className="w-5 h-5 mr-1" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-                    <path d="M11 3a1 1 0 100 2h2.586l-6.293 6.293a1 1 0 101.414 1.414L15 6.414V9a1 1 0 102 0V4a1 1 0 00-1-1h-5z" />
-                    <path d="M5 5a2 2 0 00-2 2v8a2 2 0 002 2h8a2 2 0 002-2v-3a1 1 0 10-2 0v3H5V7h3a1 1 0 000-2H5z" />
-                  </svg>
-                  Live Demo
-                </a>
-              </div>
+// --- Helper Icon Components ---
+const HighlightIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M10 18C14.4183 18 18 14.4183 18 10C18 5.58172 14.4183 2 10 2C5.58172 2 2 5.58172 2 10C2 14.4183 5.58172 18 10 18Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+        <path d="M13.5 8.5L9.5 12.5L7 10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+);
+
+
+// --- Animation Variants for Staggered Effect ---
+const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
+
+// --- The Main Projects Component ---
+const Projects = () => {
+    return (
+        <div className="relative bg-black text-white p-4 md:p-8">
+            {/* FIX: Top padding (pt-0) bilkul hata di gayi hai. */}
+            <div className="max-w-7xl mx-auto pt-0 pb-24">
+                <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-20 leading-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-white">
+                    My Creative Works
+                </h1>
+                
+                <div className="flex flex-col gap-24 md:gap-32">
+                    {projectData.map((project, index) => (
+                        <motion.div
+                            key={project.id}
+                            className="relative"
+                            variants={containerVariants}
+                            initial="hidden"
+                            whileInView="visible"
+                            viewport={{ once: true, amount: 0.2 }}
+                        >
+                            <div className={`absolute top-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-purple-900 rounded-full opacity-10 blur-3xl -z-10 ${index % 2 === 0 ? 'left-0 -translate-x-1/4' : 'right-0 translate-x-1/4'}`} />
+                            
+                            <div className={`flex flex-col md:gap-10 items-center md:items-start ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                                
+                                <motion.div className="w-full md:w-1/2 md:-translate-y-10" variants={itemVariants}>
+                                    <AnimatedPinDemo
+                                        title={project.title}
+                                        imageUrl={project.image}
+                                        liveLink={project.liveLink}
+                                        githubLink={project.githubLink}
+                                    />
+                                </motion.div>
+                                
+                                <div className="w-full md:w-1/2 relative mt-8 md:mt-0">
+                                    <motion.div className="hidden md:block absolute -top-16 right-0 md:left-0 text-[6rem] md:text-[8rem] font-black text-white/5 -z-10" variants={itemVariants}>
+                                        0{project.id}
+                                    </motion.div>
+                                    <motion.h2 className="text-3xl lg:text-4xl font-bold text-white mb-6" variants={itemVariants}>
+                                        {project.title}
+                                    </motion.h2>
+                                    
+                                    <motion.ul className="space-y-4 mb-8" variants={itemVariants}>
+                                        {project.highlights.map((highlight, i) => (
+                                            <motion.li key={i} className="flex items-start gap-3" variants={itemVariants}>
+                                                <span className="text-purple-500 mt-1 flex-shrink-0">
+                                                    <HighlightIcon />
+                                                </span>
+                                                <span className="text-white">
+                                                    {highlight}
+                                                </span>
+                                            </motion.li>
+                                        ))}
+                                    </motion.ul>
+
+                                    <motion.div className="flex flex-wrap gap-3" variants={itemVariants}>
+                                        {project.techStack.map(tech => (
+                                            <span key={tech} className="bg-gray-800 border border-gray-700 text-purple-500 text-sm font-medium px-4 py-1 rounded-full">
+                                                {tech}
+                                            </span>
+                                        ))}
+                                    </motion.div>
+                                </div>
+                            </div>
+                        </motion.div>
+                    ))}
+                </div>
             </div>
-          ))}
         </div>
-      </div>
-    </div>
-  );
+    );
 };
 
 export default Projects;

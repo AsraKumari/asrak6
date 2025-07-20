@@ -11,8 +11,8 @@ const About = () => {
   return (
     <section
       id="about"
-      // FIX: Reduced vertical padding on mobile (pt-16 pb-12) and kept original for desktop (md:py-24)
-      className="relative min-h-screen pt-16 pb-12 md:py-24 px-6 md:px-12 text-white flex flex-col items-center justify-center overflow-hidden"
+      // FIX: Bottom padding (pb-12) kam kar di gayi hai.
+      className="relative pt-24 pb-12 px-6 md:px-12 text-white flex flex-col items-center justify-center overflow-hidden"
       style={sectionStyle}
     >
       {/* Background ethereal glows (blobs) */}

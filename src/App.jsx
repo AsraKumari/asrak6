@@ -1,38 +1,45 @@
-// src/App.jsx
-"use client"; // Crucial for client-side features
+"use client";
 
 import React from 'react';
-import { cn } from './lib/utils'; // Correct import for cn utility
+import { cn } from './lib/utils';
 
-// Import main section components from their respective modular locations
+// Import all your section components
 import Navbar from './components/Navbar';
 import Hero from './pages/Hero';
 import About from './pages/About';
-import Projects from './pages/Projects'; // Import the Projects component
+import Projects from './pages/Projects';
+import MyApproach from './pages/MyApproach'; // Added import for the new section
+import Contact from './pages/Contact';
 
-// Placeholder Section Component (kept for Contact)
-const Section = ({ id, title, color }) => (
-  <section id={id} className={cn("min-h-screen flex items-center justify-center", color)}>
-    <h1 className="text-5xl font-bold text-white">{title} Section</h1>
-  </section>
-);
-
-// Main App Component
 export default function App() {
   return (
-    // Added font-inter and text-gray-100 for consistent typography and visibility
-    <div className="bg-black min-h-screen text-gray-100 font-inter">
+    // FIX: Added 'overflow-x-hidden' to prevent horizontal scrolling
+    <div className="bg-black min-h-screen text-gray-100 font-inter overflow-x-hidden">
       <Navbar />
       <main>
-        <Hero />
-        <About />
-        {/* Render the Projects component here */}
-        <Projects />
-        {/* Placeholder section for Contact */}
-        <Section id="contact" title="Contact" color="bg-gradient-to-br from-green-900/30 to-black" />
+        <section id="home">
+          <Hero />
+        </section>
+        
+        <section id="about">
+          <About />
+        </section>
+        
+        <section id="projects">
+          <Projects />
+        </section>
+        
+        {/* --- NEW SECTION ADDED HERE --- */}
+        <section id="approach">
+          <MyApproach />
+        </section>
+        
+        {/* The <Contact /> component already has its own <section id="contact"> tag */}
+        <Contact />
+        
       </main>
 
-      {/* Tailwind CSS keyframes and performance optimization class (defined once in the main App component) */}
+      {/* Tailwind CSS keyframes and performance optimization class */}
       <style>{`
         @keyframes blob {
           0% {
@@ -49,10 +56,6 @@ export default function App() {
           }
         }
 
-        /* * Performance Optimization:
-         * This class forces the animated blobs onto their own GPU layer,
-         * preventing "jank" or "glitching" during scrolling.
-         */
         .force-gpu {
           position: absolute;
           will-change: transform;
