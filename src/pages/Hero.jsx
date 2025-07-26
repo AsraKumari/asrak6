@@ -45,10 +45,10 @@ const Hero = () => {
   ];
 
   const handleDownloadResume = () => {
-    const resumeUrl = '/Asrak6-FrontendDev-Resume.pdf';
+    const resumeUrl = '/Asrak6_Resume.pdf';
     const link = document.createElement('a');
     link.href = resumeUrl;
-    link.download = 'Asra_Kumari_Frontend_Developer_Resume.pdf';
+    link.download = 'Asrak6_Resume.pdf';
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -98,7 +98,7 @@ const Hero = () => {
             color: '#FFFFFF',
           }}
         >
-          Crafting Digital Experiences, Pixel by Pixel.
+          Crafting Digital Experiences Pixel by Pixel.
         </motion.h1>
 
         {/* Sub-headline/Tagline */}
